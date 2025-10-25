@@ -12,13 +12,13 @@ pipeline {
     }
 
     environment {
-        APP_VERSION = "1.1.0"
+        APP_VERSION = "1.0.0"
     }
 
     stages {
         stage('Install Dependencies') {
             steps {
-                echo "Installing Node.js dependencies..."
+                echo "Installing dependencies..."
                 bat "npm install"
             }
         }
@@ -34,24 +34,24 @@ pipeline {
                 expression { return params.BUILD_ENV == 'dev' }
             }
             steps {
-                echo 'Running unit tests with Jest...'
+                echo 'Running tests...'
                 bat "npm test"
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Simulating deployment of Node.js Calculator App...'
+                echo 'Simulating deployment...'
             }
         }
     }
 
     post {
         always {
-            echo 'Cleaning up workspace...'
+            echo 'Cleaning up...'
         }
         success {
-            echo 'Pipeline executed successfully.'
+            echo 'Pipeline executed successfully!'
         }
         failure {
             echo 'Pipeline failed.'
